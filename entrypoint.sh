@@ -17,8 +17,8 @@ git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GIT
 
 # run the python files
 pip install beautifulsoup4
-python actions/src/update_index_html.py
-python actions/src/update_metadata_json.py
+python ./actions/src/update_index_html.py
+python ./actions/src/update_metadata_json.py
 
 # send to index
 #   clone destination repo (index)
