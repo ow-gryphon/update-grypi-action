@@ -1,4 +1,7 @@
 #!/bin/sh -l
+echo "installing git"
+apt install git
+
 echo "Cloning destination git repository"
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
