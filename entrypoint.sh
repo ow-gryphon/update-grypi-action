@@ -6,7 +6,7 @@ git config --global user.name "$INPUT_USER_NAME"
 git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@ow-gryphon/grypi.git" "grypi"
 
 # clone the template repo
-git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER.git" "template"
+git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GITHUB_REPOSITORY.git" "template"
 
 # run the python files
 pip install beautifulsoup4
@@ -19,8 +19,8 @@ git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GIT
 
 # copy the new files to index
 cp "grypi/index.html" "destination/index.html"
-cp "grypi/$GITHUB_REPOSITORY/index.html" "destination/$GITHUB_REPOSITORY/index.html"
-cp "template/metadata.json" "destination/$GITHUB_REPOSITORY/metadata.json"
+cp "grypi/$INPUT_GITHUB_REPOSITORY/index.html" "destination/$INPUT_GITHUB_REPOSITORY/index.html"
+cp "template/metadata.json" "destination/$INPUT_GITHUB_REPOSITORY/metadata.json"
 
 #   commit and push
 # shellcheck disable=SC2164
@@ -28,7 +28,7 @@ cd "destination"
 git add .
 if git status | grep -q "Changes to be committed"
 then
-  git commit --message "Update from https://$INPUT_GIT_SERVER/commit/${GITHUB_SHA}"
+  git commit --message "Update from https://github.com/${INPUT_GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
   echo "Pushing git commit"
   git push -u origin HEAD:master
 else
