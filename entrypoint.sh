@@ -10,7 +10,7 @@ git config --global user.name "$INPUT_USER_NAME"
 git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/ow-gryphon/grypi.git" "grypi"
 
 # clone the template repo
-git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/$INPUT_GITHUB_REPOSITORY.git" "template"
+git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/${GITHUB_REPOSITORY}.git" "template"
 
 # run the python files
 pip install beautifulsoup4
@@ -19,12 +19,12 @@ python src/update_metadata_json.py
 
 # send to index
 #   clone destination repo (index)
-git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@ow-gryphon/grypi.git" "destination"
+git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/ow-gryphon/grypi.git" "destination"
 
 # copy the new files to index
 cp "grypi/index.html" "destination/index.html"
-cp "grypi/$INPUT_GITHUB_REPOSITORY/index.html" "destination/$INPUT_GITHUB_REPOSITORY/index.html"
-cp "template/metadata.json" "destination/$INPUT_GITHUB_REPOSITORY/metadata.json"
+cp "grypi/${GITHUB_REPOSITORY#*/}/index.html" "destination/${GITHUB_REPOSITORY#*/}/index.html"
+cp "template/metadata.json" "destination/${GITHUB_REPOSITORY#*/}/metadata.json"
 
 #   commit and push
 # shellcheck disable=SC2164
