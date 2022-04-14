@@ -1,0 +1,27 @@
+# action.yml
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  user_email:
+    description: 'Email for the git commit'
+    required: true
+
+  user_name:
+    description: 'GitHub username for the commit'
+    required: true
+
+  repository_name:
+    description: 'Repository name that the action is triggered.'
+    required: true
+
+  github_context:
+    description: 'Context'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.user-email }}
+    - ${{ inputs.user-name }}
+    - ${{ inputs.repository-name }}
