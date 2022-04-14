@@ -7,10 +7,10 @@ git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
 
 # clone grypi
-git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@ow-gryphon/grypi.git" "grypi"
+git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/ow-gryphon/grypi.git" "grypi"
 
 # clone the template repo
-git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GITHUB_REPOSITORY.git" "template"
+git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/$INPUT_GITHUB_REPOSITORY.git" "template"
 
 # run the python files
 pip install beautifulsoup4
