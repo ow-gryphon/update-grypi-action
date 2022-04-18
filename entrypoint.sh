@@ -24,6 +24,7 @@ git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GIT
 
 # copy the new files to index
 cp "grypi/index.html" "destination/index.html"
+mkdir -p "destination/${GITHUB_REPOSITORY#*/}"
 cp "grypi/${GITHUB_REPOSITORY#*/}/index.html" "destination/${GITHUB_REPOSITORY#*/}/index.html"
 cp "template/metadata.json" "destination/${GITHUB_REPOSITORY#*/}/metadata.json"
 
