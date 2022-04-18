@@ -11,7 +11,7 @@ git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GIT
 git clone --single-branch --branch main "https://x-access-token:$API_TOKEN_GITHUB@github.com/ow-gryphon/update-grypy-action.git" "actions"
 
 # clone the template repo
-git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/${GITHUB_REPOSITORY}.git" "template"
+git clone --single-branch "https://x-access-token:$API_TOKEN_GITHUB@github.com/${GITHUB_REPOSITORY}.git" "template"
 
 # run the python files
 pip install beautifulsoup4
