@@ -49,11 +49,9 @@ def main():
             metadata = json.load(f)
 
             if type(index_metadata) != list:
-                print(index_metadata)
                 # if the metadata is not in the list format yet, convert it
                 new_format = []
                 for version, data in index_metadata.items():
-                    print(data)
                     data["version"] = version
                     new_format.append(data)
                 index_metadata = new_format
