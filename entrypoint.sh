@@ -10,15 +10,15 @@ git config --global user.name "$INPUT_USER_NAME"
 git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/ow-gryphon/grypi.git" "grypi"
 
 # clone actions
-git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/ow-gryphon/update-grypy-action.git" "actions"
+git clone --single-branch --branch main "https://x-access-token:$API_TOKEN_GITHUB@github.com/ow-gryphon/update-grypy-action.git" "actions"
 
 # clone the template repo
 git clone --single-branch --branch master "https://x-access-token:$API_TOKEN_GITHUB@github.com/${GITHUB_REPOSITORY}.git" "template"
 
 # run the python files
 pip install beautifulsoup4
-python ./actions/src/update_index_html.py
-python ./actions/src/update_metadata_json.py
+python actions/src/update_index_html.py
+python actions/src/update_metadata_json.py
 
 # send to index
 #   clone destination repo (index)
