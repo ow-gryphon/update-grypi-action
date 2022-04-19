@@ -2,9 +2,20 @@ import json
 from pathlib import Path
 
 
-TEMPLATE_METADATA = Path("template")
+TEMPLATE_FOLDER = Path("template")
 
-with open(TEMPLATE_METADATA, "r", encoding="utf-8") as f:
+# check template minimal structure
+assert (TEMPLATE_FOLDER / "requirements.txt").is_file()
+assert (TEMPLATE_FOLDER / "setup.py").is_file()
+assert (TEMPLATE_FOLDER / "metadata.json").is_file()
+assert (TEMPLATE_FOLDER / "README.md").is_file()
+
+assert (TEMPLATE_FOLDER / "template").is_dir()
+assert (TEMPLATE_FOLDER / "template" / "requirements.txt").is_file()
+assert (TEMPLATE_FOLDER / "template" / "README.md").is_file()
+
+
+with open(TEMPLATE_FOLDER / "metadata.json", "r", encoding="utf-8") as f:
     metadata = json.load(f)
 
 # check mandatory fields
@@ -13,6 +24,7 @@ faulting_fields = []
 for field in required_fields:
     if field not in metadata:
         faulting_fields.append(field)
+
 
 if len(faulting_fields):
     raise AttributeError(f"Some required fields are not present in the metadata.json file: {faulting_fields}")
