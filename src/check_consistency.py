@@ -11,7 +11,6 @@ assert (TEMPLATE_FOLDER / "metadata.json").is_file()
 assert (TEMPLATE_FOLDER / "README.md").is_file()
 
 assert (TEMPLATE_FOLDER / "template").is_dir()
-assert (TEMPLATE_FOLDER / "template" / "requirements.txt").is_file()
 assert (TEMPLATE_FOLDER / "template" / "README.md").is_file()
 
 
