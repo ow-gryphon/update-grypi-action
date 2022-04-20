@@ -31,16 +31,16 @@ if len(faulting_fields):
 # check field formats
 assert type(metadata["command"]) == str
 
-assert "dependencies" in metadata or \
+assert "dependencies" in metadata and \
        type(metadata["dependencies"]) == list
 
-assert "topic" in metadata or \
+assert "topic" in metadata and \
        type(metadata["topic"]) == list
 
-assert "methodology" in metadata or \
+assert "methodology" in metadata and \
        type(metadata["methodology"]) == list
 
-assert "keywords" in metadata or \
+assert "keywords" in metadata and \
        type(metadata["keywords"]) == list
 
 
