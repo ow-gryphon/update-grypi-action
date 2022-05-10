@@ -1,7 +1,7 @@
+import copy
+import json
 import os
 import re
-import json
-import copy
 import shutil
 from pathlib import Path
 

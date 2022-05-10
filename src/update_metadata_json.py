@@ -1,6 +1,6 @@
+import json
 import os
 import re
-import json
 from pathlib import Path
 
 INDEX_FILE = "grypi/index.html"
