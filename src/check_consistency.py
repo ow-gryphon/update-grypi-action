@@ -57,8 +57,8 @@ assert metadata["command"] in ["init", "generate"]
 
 
 def clear_data(raw_str):
-    _data = list(filter(len, raw_str.split("'")))[0]
-    return list(filter(len, _data.split("\"")))[0]
+    _data = list(filter(lambda x: len(x.strip()), raw_str.split("'")))[0].strip()
+    return list(filter(lambda x: len(x.strip()), _data.split("\"")))[0].strip()
 
 
 context = json.loads(os.environ["GITHUB_CONTEXT"])
@@ -67,8 +67,9 @@ tag_name = context["event"]["ref"].split("/")[-1]
 
 with open(TEMPLATE_FOLDER / "setup.py", "r", encoding="UTF-8") as f:
     raw_text = f.read()
-    version = clear_data(raw_text.split("version=")[1].split(',')[0])
-    name = clear_data(raw_text.split("name=")[1].split(',')[0])
+    version = clear_data(raw_text.split("version=")[1].strip().split(',')[0].strip())
+    name = clear_data(raw_text.split("name=")[1].strip().split(',')[0].strip())
+    # TODO: Make this logic a bit more robust
 
 # check if version on setup.py is in the right format
 assert VERSION_PATTERN.match(version)

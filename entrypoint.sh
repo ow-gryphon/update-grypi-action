@@ -14,15 +14,15 @@ git clone --single-branch --branch main "https://x-access-token:$API_TOKEN_GITHU
 git clone --single-branch "https://x-access-token:$API_TOKEN_GITHUB@github.com/${GITHUB_REPOSITORY}.git" "template"
 
 # run the python files
-pip install beautifulsoup4
+pip install beautifulsoup4 -qqq
 
-echo "Checking for consistency on the template."
+echo "python actions/src/check_consistency.py"
 python actions/src/check_consistency.py
 
-echo "Updating html files."
+echo "python actions/src/update_index_html.py"
 python actions/src/update_index_html.py
 
-echo "Updating json files."
+echo "python actions/src/update_metadata_json.py"
 python actions/src/update_metadata_json.py
 
 # send to index
