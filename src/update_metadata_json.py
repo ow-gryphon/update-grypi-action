@@ -42,7 +42,7 @@ def main():
         metadata = [new_metadata]
 
         with open(new_metadata_path, "w", encoding="utf-8") as f:
-            f.write(json.dumps(metadata))
+            f.write(json.dumps(metadata, sort_keys=True, indent=4))
 
     else:
         with open(new_metadata_path, "r+", encoding="utf-8") as f:
@@ -59,7 +59,7 @@ def main():
             index_metadata.append(new_metadata)
 
             f.seek(0)
-            f.write(json.dumps(index_metadata))
+            f.write(json.dumps(index_metadata, sort_keys=True, indent=4))
             f.truncate()
 
     if dry_run:
