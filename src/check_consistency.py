@@ -85,7 +85,7 @@ try:
 except Exception as e:
     if VERSION_PATTERN.match(tag_name) and tag_name != version:
         # delete tag
-        os.system(f"git tag -d {tag_name} && git push --tags")
-        os.system(f"git push --delete origin {tag_name}")
+        os.system(f"cd {TEMPLATE_FOLDER} && git tag -d {tag_name} && git push --tags")
+        os.system(f"cd {TEMPLATE_FOLDER} && git push --delete origin {tag_name}")
 
     raise e
