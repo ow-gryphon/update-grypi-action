@@ -75,8 +75,10 @@ with open(TEMPLATE_FOLDER / "setup.py", "r", encoding="UTF-8") as f:
 assert VERSION_PATTERN.match(version)
 
 # check if version on setup.py is equal to tag
-if VERSION_PATTERN.match(tag_name):
-    assert tag_name == version
+
+assert tag_name == version, f"Tag name \"{tag_name}\" doesn't match the version \"{version}\ from setup.py"
+
+assert VERSION_PATTERN.match(tag_name), f"Tag name \"{tag_name}\" is not in the format 0.0.0 (X.X.X)"
 
 # check if repository name is equal to the package name on setup.py
-assert repo_name == name
+assert repo_name == name, f"Repo name \"{repo_name}\" doesn't match the package name \"{name}\ from setup.py"
