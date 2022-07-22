@@ -65,6 +65,29 @@ context = json.loads(os.environ["GITHUB_CONTEXT"])
 repo_name = context["repository"].split("/")[-1]
 tag_name = context["event"]["ref"].split("/")[-1]
 
+
+def execute_command(command) -> tuple:
+    from subprocess import PIPE, Popen
+
+    p = Popen(command, shell=True, stdout=PIPE, stderr=PIPE)
+    stdout, stderr = p.communicate()
+    return stderr.decode(), stdout.decode()
+
+
+with open(TEMPLATE_FOLDER / "requirements.txt", "r", encoding="utf-8") as f:
+    contents = f.read()
+    libraries = contents.strip().split("\n")
+
+    for lib_name in libraries:
+        lib_name = lib_name.strip().split('>=')[0].split('<')[0].split('==')[0]
+        pip_command = f"pip index versions {lib_name} --index-url https://ow-gryphon.github.io/grypi/"
+
+        error_out, std_out = execute_command(pip_command)
+
+        assert "Available versions" in std_out, f"Required template \"{lib_name}\" was not found on GryPi index."
+        assert "ERROR" not in error_out, f"Required template \"{lib_name}\" was not found on GryPi index."
+
+
 with open(TEMPLATE_FOLDER / "setup.py", "r", encoding="UTF-8") as f:
     raw_text = f.read()
     version = clear_data(raw_text.split("version=")[1].strip().split(',')[0].strip())
