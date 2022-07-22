@@ -71,14 +71,13 @@ with open(TEMPLATE_FOLDER / "setup.py", "r", encoding="UTF-8") as f:
     name = clear_data(raw_text.split("name=")[1].strip().split(',')[0].strip())
     # TODO: Make this logic a bit more robust
 
-# check if version on setup.py is in the right format
-assert VERSION_PATTERN.match(version)
 
 # check if version on setup.py is equal to tag
+assert tag_name == version, f"Tag name \"{tag_name}\" doesn't match the version \"{version}\" from setup.py"
 
-assert tag_name == version, f"Tag name \"{tag_name}\" doesn't match the version \"{version}\ from setup.py"
-
+# check if version is in the right format
+assert VERSION_PATTERN.match(version), f"Version on setup.py \"{tag_name}\" is not in the format 0.0.0 (X.X.X)"
 assert VERSION_PATTERN.match(tag_name), f"Tag name \"{tag_name}\" is not in the format 0.0.0 (X.X.X)"
 
 # check if repository name is equal to the package name on setup.py
-assert repo_name == name, f"Repo name \"{repo_name}\" doesn't match the package name \"{name}\ from setup.py"
+assert repo_name == name, f"Repo name \"{repo_name}\" doesn't match the package name \"{name}\" from setup.py"
