@@ -81,3 +81,8 @@ assert tag_name == version, f"Tag name \"{tag_name}\" doesn't match the version 
 # check if version is in the right format
 assert VERSION_PATTERN.match(version), f"Version on setup.py \"{tag_name}\" is not in the format 0.0.0 (X.X.X)"
 assert VERSION_PATTERN.match(tag_name), f"Tag name \"{tag_name}\" is not in the format 0.0.0 (X.X.X)"
+
+
+if VERSION_PATTERN.match(tag_name) and tag_name != version:
+    # delete tag
+    os.system(f"git tag -d {tag_name} && git push --tags")
