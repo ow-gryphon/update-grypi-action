@@ -79,6 +79,9 @@ with open(TEMPLATE_FOLDER / "requirements.txt", "r", encoding="utf-8") as f:
     libraries = contents.strip().split("\n")
 
     for lib_name in libraries:
+        if not len(lib_name):
+            continue
+
         lib_name = lib_name.strip().split('>=')[0].split('<')[0].split('==')[0]
         pip_command = f"pip index versions {lib_name} --index-url https://ow-gryphon.github.io/grypi/"
 
