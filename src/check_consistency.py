@@ -88,4 +88,6 @@ except Exception as e:
         os.system(f"cd {TEMPLATE_FOLDER} && git tag -d {tag_name} && git push --tags")
         os.system(f"cd {TEMPLATE_FOLDER} && git push --delete origin {tag_name}")
 
+        print(f"Use the command: \"git tag -d {tag_name}\" to remove the tag from your local repository.")
+
     raise e
