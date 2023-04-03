@@ -12,7 +12,11 @@ VERSION_PATTERN = re.compile(
 TEMPLATE_FOLDER = Path("template")
 
 # check template minimal structure
-assert (TEMPLATE_FOLDER / "requirements.txt").is_file()
+try:
+    assert (TEMPLATE_FOLDER / "gryphon_requirements.txt").is_file()
+except:
+    assert (TEMPLATE_FOLDER / "requirements.txt").is_file()
+
 assert (TEMPLATE_FOLDER / "setup.py").is_file()
 assert (TEMPLATE_FOLDER / "metadata.json").is_file()
 assert (TEMPLATE_FOLDER / "README.md").is_file()
