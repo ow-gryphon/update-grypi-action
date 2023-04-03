@@ -77,22 +77,26 @@ def execute_command(command) -> tuple:
     stdout, stderr = p.communicate()
     return stderr.decode(), stdout.decode()
 
+try:
+    with open(TEMPLATE_FOLDER / "requirements.txt", "r", encoding="utf-8") as f:
+        contents = f.read()
+        libraries = contents.strip().split("\n")
+except:
+    with open(TEMPLATE_FOLDER / "gryphon_requirements.txt", "r", encoding="utf-8") as f:
+        contents = f.read()
+        libraries = contents.strip().split("\n")
+        
+for lib_name in libraries:
+    if not len(lib_name):
+        continue
 
-with open(TEMPLATE_FOLDER / "requirements.txt", "r", encoding="utf-8") as f:
-    contents = f.read()
-    libraries = contents.strip().split("\n")
+    lib_name = lib_name.strip().split('>=')[0].split('<')[0].split('==')[0]
+    pip_command = f"pip index versions {lib_name} --index-url https://ow-gryphon.github.io/grypi/"
 
-    for lib_name in libraries:
-        if not len(lib_name):
-            continue
+    error_out, std_out = execute_command(pip_command)
 
-        lib_name = lib_name.strip().split('>=')[0].split('<')[0].split('==')[0]
-        pip_command = f"pip index versions {lib_name} --index-url https://ow-gryphon.github.io/grypi/"
-
-        error_out, std_out = execute_command(pip_command)
-
-        assert "Available versions" in std_out, f"Required template \"{lib_name}\" was not found on GryPi index."
-        assert "ERROR" not in error_out, f"Required template \"{lib_name}\" was not found on GryPi index."
+    assert "Available versions" in std_out, f"Required template \"{lib_name}\" was not found on GryPi index."
+    assert "ERROR" not in error_out, f"Required template \"{lib_name}\" was not found on GryPi index."
 
 
 with open(TEMPLATE_FOLDER / "setup.py", "r", encoding="UTF-8") as f:
