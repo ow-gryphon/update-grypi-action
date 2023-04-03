@@ -78,11 +78,11 @@ def execute_command(command) -> tuple:
     return stderr.decode(), stdout.decode()
 
 try:
-    with open(TEMPLATE_FOLDER / "requirements.txt", "r", encoding="utf-8") as f:
+    with open(TEMPLATE_FOLDER / "gryphon_requirements.txt", "r", encoding="utf-8") as f:
         contents = f.read()
         libraries = contents.strip().split("\n")
 except:
-    with open(TEMPLATE_FOLDER / "gryphon_requirements.txt", "r", encoding="utf-8") as f:
+    with open(TEMPLATE_FOLDER / "requirements.txt", "r", encoding="utf-8") as f:
         contents = f.read()
         libraries = contents.strip().split("\n")
         
